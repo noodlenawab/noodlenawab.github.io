@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alka Madan — Edge Security Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --coral:#F4633A;--coral-lt:#FEF0EB;--sage:#4A7C6F;--sage-lt:#EBF3F0;
+  --ink:#1A1A1A;--mid:#6B6B6B;--pale:#F8F6F3;--white:#FFFFFF;
+  --border:#E8E4DE;--yellow:#F9C846;
+  --serif:'Fraunces',Georgia,serif;--sans:'Plus Jakarta Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--ink);letter-spacing:-0.01em;}
+.nav-logo span{color:var(--coral);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:0.85rem;font-weight:500;color:var(--mid);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--coral);}
+
+#hero{min-height:100vh;padding:8rem 3rem 5rem;display:flex;align-items:center;position:relative;overflow:hidden;}
+.blob{position:absolute;border-radius:60% 40% 50% 45%;z-index:0;animation:blob 14s ease-in-out infinite alternate;}
+.blob1{top:-10%;right:-8%;width:560px;height:560px;background:var(--coral-lt);}
+.blob2{bottom:0;left:-5%;width:320px;height:320px;background:var(--sage-lt);animation-duration:18s;animation-direction:alternate-reverse;}
+@keyframes blob{from{border-radius:60% 40% 50% 45%;transform:scale(1) rotate(0deg);}to{border-radius:45% 55% 40% 60%;transform:scale(1.05) rotate(6deg);}}
+.hero-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 400px;gap:4rem;align-items:center;}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;color:var(--coral);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp .5s ease .1s forwards;}
+.hero-tag::before{content:'';width:24px;height:2px;background:var(--coral);display:inline-block;}
+h1.hero-name{font-family:var(--serif);font-size:clamp(3.8rem,7vw,6.5rem);font-weight:900;line-height:.95;letter-spacing:-.03em;margin-bottom:1.25rem;opacity:0;animation:fadeUp .5s ease .25s forwards;}
+h1.hero-name em{font-style:italic;color:var(--coral);}
+.hero-desc{font-size:1.05rem;color:var(--mid);line-height:1.75;max-width:500px;margin-bottom:2.5rem;font-weight:300;opacity:0;animation:fadeUp .5s ease .4s forwards;}
+.hero-desc strong{color:var(--ink);font-weight:600;}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .5s ease .55s forwards;}
+.btn-p{display:inline-block;font-family:var(--sans);font-size:.88rem;font-weight:600;padding:.85rem 2rem;background:var(--coral);color:var(--white);border:2px solid var(--coral);border-radius:100px;text-decoration:none;transition:transform .15s,box-shadow .15s;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(244,99,58,.3);}
+.btn-s{display:inline-block;font-family:var(--sans);font-size:.88rem;font-weight:600;padding:.85rem 2rem;background:transparent;color:var(--ink);border:2px solid var(--border);border-radius:100px;text-decoration:none;transition:border-color .2s,transform .15s;}
+.btn-s:hover{border-color:var(--ink);transform:translateY(-2px);}
+.hero-right{display:flex;flex-direction:column;gap:1rem;opacity:0;animation:fadeUp .5s ease .65s forwards;}
+.stat-card{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:1.4rem 1.75rem;display:flex;align-items:center;gap:1.25rem;transition:transform .2s,box-shadow .2s;}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.07);}
+.stat-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.ic-coral{background:var(--coral-lt);}.ic-sage{background:var(--sage-lt);}.ic-yellow{background:#FEF9E7;}
+.stat-num{font-family:var(--serif);font-size:1.7rem;font-weight:900;line-height:1;letter-spacing:-.02em;color:var(--ink);}
+.stat-lbl{font-size:.78rem;color:var(--mid);margin-top:2px;}
+
+section{padding:6rem 3rem;}
+.container{max-width:1200px;margin:0 auto;}
+.eyebrow{font-size:.78rem;font-weight:600;color:var(--coral);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--coral);}
+h2.stitle{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3rem);font-weight:900;line-height:1.08;letter-spacing:-.02em;margin-bottom:3.5rem;}
+h2.stitle em{font-style:italic;color:var(--coral);}
+h2.stitle .sage{color:var(--sage);}
+
+#pillars{background:var(--pale);}
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.pillar{background:var(--white);border:1.5px solid var(--border);border-radius:24px;padding:2.25rem;transition:transform .2s,box-shadow .2s;}
+.pillar:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08);}
+.p-emoji{font-size:2rem;margin-bottom:1.25rem;display:block;}
+.pillar h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin-bottom:.75rem;line-height:1.2;letter-spacing:-.01em;}
+.pillar p{font-size:.9rem;color:var(--mid);line-height:1.7;margin-bottom:1.5rem;font-weight:300;}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.pill{font-size:.72rem;font-weight:600;padding:.3rem .75rem;border-radius:100px;}
+.pill-c{background:var(--coral-lt);color:var(--coral);}
+.pill-s{background:var(--sage-lt);color:var(--sage);}
+.pill-y{background:#FEF9E7;color:#B8860B;}
+
+#experience{background:var(--white);}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.exp-card{background:var(--pale);border:1.5px solid var(--border);border-radius:24px;padding:2rem 2.25rem;transition:transform .2s,box-shadow .2s;}
+.exp-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.07);}
+.exp-card.feat{background:var(--coral);border-color:var(--coral);color:var(--white);grid-column:1/-1;}
+.exp-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.exp-period{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);}
+.exp-card.feat .exp-period{color:rgba(255,255,255,.7);}
+.exp-badge{font-size:.7rem;font-weight:600;padding:.2rem .65rem;border-radius:100px;background:var(--white);color:var(--coral);}
+.exp-card.feat .exp-badge{background:rgba(255,255,255,.2);color:var(--white);}
+.exp-co{font-size:.82rem;font-weight:600;color:var(--mid);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.05em;}
+.exp-card.feat .exp-co{color:rgba(255,255,255,.8);}
+.exp-role{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:1rem;line-height:1.2;letter-spacing:-.01em;}
+.exp-card.feat .exp-role{color:var(--white);font-size:1.6rem;}
+.exp-ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.exp-ul li{font-size:.875rem;color:var(--mid);padding-left:1.1rem;position:relative;line-height:1.55;font-weight:300;}
+.exp-card.feat .exp-ul li{color:rgba(255,255,255,.85);}
+.exp-ul li::before{content:'→';position:absolute;left:0;color:var(--coral);font-size:.8rem;}
+.exp-card.feat .exp-ul li::before{color:var(--yellow);}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem;}
+.chip{font-size:.7rem;font-weight:600;padding:.25rem .65rem;border-radius:100px;background:var(--white);border:1px solid var(--border);color:var(--mid);}
+.exp-card.feat .chip{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:var(--white);}
+
+#consulting{background:var(--pale);}
+.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+.case-card{background:var(--white);border:1.5px solid var(--border);border-radius:24px;padding:2.25rem;transition:transform .2s,box-shadow .2s;}
+.case-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08);}
+.case-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;}
+.case-sector{font-size:.75rem;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:.07em;}
+.case-status{font-size:.7rem;font-weight:600;padding:.2rem .65rem;border-radius:100px;background:var(--sage-lt);color:var(--sage);}
+.case-card h3{font-family:var(--serif);font-size:1.2rem;font-weight:700;margin-bottom:.75rem;line-height:1.25;letter-spacing:-.01em;}
+.case-card p{font-size:.875rem;color:var(--mid);line-height:1.65;margin-bottom:1.5rem;font-weight:300;}
+.outcomes{display:flex;flex-direction:column;gap:.65rem;border-top:1px solid var(--border);padding-top:1.25rem;}
+.oc-row{display:flex;gap:1rem;align-items:baseline;}
+.oc-num{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--coral);min-width:90px;flex-shrink:0;}
+.oc-desc{font-size:.82rem;color:var(--mid);font-weight:300;line-height:1.5;}
+
+#skills{background:var(--white);}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem;}
+.sg{background:var(--pale);border:1.5px solid var(--border);border-radius:20px;padding:1.75rem;}
+.sg-name{font-size:.78rem;font-weight:600;color:var(--coral);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);}
+.sk-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.65rem;}
+.sk-name{font-size:.85rem;color:var(--ink);font-weight:400;flex:1;}
+.sk-bar{width:64px;height:4px;background:var(--border);border-radius:100px;overflow:hidden;flex-shrink:0;}
+.sk-fill{height:100%;border-radius:100px;background:var(--coral);}
+.sk-fill.s{background:var(--sage);}.sk-fill.y{background:var(--yellow);}
+.plats{display:flex;gap:1rem;flex-wrap:wrap;}
+.plat{background:var(--pale);border:1.5px solid var(--border);border-radius:100px;padding:.65rem 1.25rem;transition:border-color .2s,transform .15s;}
+.plat:hover{border-color:var(--coral);transform:translateY(-2px);}
+.plat-n{font-size:.85rem;font-weight:600;color:var(--ink);}
+.plat-s{font-size:.7rem;color:var(--mid);margin-top:1px;}
+
+#contact{background:var(--ink);color:var(--white);}
+.contact-in{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.contact-in h2{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem;}
+.contact-in h2 em{font-style:italic;color:var(--coral);}
+.contact-in p{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:2rem;font-weight:300;}
+.c-links{display:flex;flex-direction:column;gap:.85rem;}
+.c-link{display:flex;align-items:center;gap:1rem;text-decoration:none;}
+.c-type{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);min-width:60px;}
+.c-val{font-size:.92rem;color:rgba(255,255,255,.85);border-bottom:1px solid transparent;transition:color .2s,border-color .2s;}
+.c-link:hover .c-val{color:var(--coral);border-color:var(--coral);}
+.av-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:2rem;}
+.av-hdr{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
+.av-dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 8px #4ADE80;animation:glow 2s ease infinite;}
+@keyframes glow{0%,100%{opacity:1;}50%{opacity:.4;}}
+.av-rows{display:flex;flex-direction:column;gap:.85rem;}
+.av-row{display:flex;justify-content:space-between;align-items:center;padding-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.07);font-size:.88rem;}
+.av-row:last-child{border-bottom:none;padding-bottom:0;}
+.av-type{color:rgba(255,255,255,.6);font-weight:300;}
+.b-open{font-size:.68rem;font-weight:600;padding:.2rem .65rem;border-radius:100px;background:rgba(74,222,128,.15);color:#4ADE80;}
+.b-ltd{font-size:.68rem;font-weight:600;padding:.2rem .65rem;border-radius:100px;background:rgba(244,99,58,.15);color:#F4633A;}
+
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer p{font-size:.78rem;color:rgba(255,255,255,.3);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:960px){
+  nav{padding:0 1.5rem;}.nav-links{display:none;}
+  section{padding:4rem 1.5rem;}#hero{padding:7rem 1.5rem 3rem;}
+  .hero-inner{grid-template-columns:1fr;}.hero-right{display:none;}
+  .pillars-grid,.exp-grid,.cases-grid,.skills-grid,.contact-in{grid-template-columns:1fr;}
+  .exp-card.feat{grid-column:1;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Alka <span>Madan</span></div>
+  <ul class="nav-links">
+    <li><a href="#pillars">What I do</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#consulting">Consulting</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Say hello</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Bangalore, India · Open to remote &amp; relocation</div>
+      <h1 class="hero-name">Hi, I'm<br><em>Alka.</em></h1>
+      <p class="hero-desc">
+        I keep the internet's most interesting platforms <strong>safe, fast, and lean</strong>.
+        Seven years securing the edge — from <strong>DDoS and WAF</strong> to
+        <strong>CDN performance</strong> and the cost of origin hits nobody's counting.
+        Akamai · Cloudflare · Imperva.
+      </p>
+      <div class="hero-ctas">
+        <a href="Alka_Madan_Resume_v3.docx" class="btn-p" download>Download my resume</a>
+        <a href="#contact" class="btn-s">Let's talk →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card"><div class="stat-icon ic-coral">🛡️</div><div><div class="stat-num">$200M+</div><div class="stat-lbl">Revenue protected across career</div></div></div>
+      <div class="stat-card"><div class="stat-icon ic-sage">⚡</div><div><div class="stat-num">6B+</div><div class="stat-lbl">Edge hits/month under management</div></div></div>
+      <div class="stat-card"><div class="stat-icon ic-yellow">🗓️</div><div><div class="stat-num">7 years</div><div class="stat-lbl">Owning the edge layer</div></div></div>
+      <div class="stat-card"><div class="stat-icon ic-coral">🌐</div><div><div class="stat-num">3 platforms</div><div class="stat-lbl">Akamai · Cloudflare · Imperva</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pillars">
+  <div class="container">
+    <div class="eyebrow">What I do</div>
+    <h2 class="stitle">Three things I'm<br>genuinely <em>good at.</em></h2>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <span class="p-emoji">🛡️</span>
+        <h3>Edge Security</h3>
+        <p>DDoS, WAF, bot management, API abuse — the full threat surface between the internet and your origin. I've been the escalation point for enterprise security incidents and built detection logic from scratch for some of the world's biggest platforms.</p>
+        <div class="tags">
+          <span class="pill pill-c">DDoS L3/L4/L7</span><span class="pill pill-c">WAF / WAAP</span><span class="pill pill-c">Bot Manager</span><span class="pill pill-c">API Security</span><span class="pill pill-c">OWASP</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="p-emoji">⚡</span>
+        <h3>CDN Performance</h3>
+        <p>I treat CDN offload as an engineering discipline, not a checkbox. I read mPulse RUM and CrUX data, trace Core Web Vitals issues back to specific config gaps, and fix them — compression, caching rules, SureRoute, Early Hints, Image Manager.</p>
+        <div class="tags">
+          <span class="pill pill-s">CDN Offload</span><span class="pill pill-s">Core Web Vitals</span><span class="pill pill-s">mPulse / RUM</span><span class="pill pill-s">SureRoute</span><span class="pill pill-s">Cloudlets</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="p-emoji">💸</span>
+        <h3>Cost Engineering</h3>
+        <p>Every unnecessary origin hit is money leaving the business. I audit whether your edge contracts are actually earning their keep — broken SureRoute configs, underutilised BMP deployments, 404 storms, SiteShield subscriptions with better alternatives.</p>
+        <div class="tags">
+          <span class="pill pill-y">Origin Cost Reduction</span><span class="pill pill-y">Contract ROI</span><span class="pill pill-y">Offload Engineering</span><span class="pill pill-y">Spend Audit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="eyebrow">Experience</div>
+    <h2 class="stitle">Built on <em>real</em><br>production systems.</h2>
+    <div class="exp-grid">
+      <div class="exp-card feat">
+        <div class="exp-meta"><span class="exp-period">2024 — Present</span><span class="exp-badge">Current</span></div>
+        <div class="exp-co">Granicus</div>
+        <div class="exp-role">Senior Edge Architect &amp; DevSecOps Engineer</div>
+        <ul class="exp-ul">
+          <li>Own DDoS and WAF protection across multiple production SaaS applications, 24/7.</li>
+          <li>Led zero-downtime migrations from Imperva and Cloudflare to Akamai — full policy translation, no disruption.</li>
+          <li>Replaced Akamai SiteShield with IP ACL-based security zones, eliminating a paid subscription while improving posture.</li>
+          <li>Terraform-driven config automation, KPI dashboards, and incident runbooks for SRE teams.</li>
+        </ul>
+        <div class="chips"><span class="chip">Akamai</span><span class="chip">Azure NSGs</span><span class="chip">Terraform</span><span class="chip">WAF / WAAP</span><span class="chip">Zero-downtime migration</span></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-meta"><span class="exp-period">2023 — 2024</span></div>
+        <div class="exp-co">Expedia Group</div>
+        <div class="exp-role">Security Engineer 3</div>
+        <ul class="exp-ul">
+          <li>Led a 3-person edge security team across Expedia's global travel platform.</li>
+          <li>Tuned ~30 Akamai WAAP configs — contributed to ~$60M USD in revenue protection.</li>
+          <li>Drove bot management vendor evaluations and service request management with Akamai.</li>
+        </ul>
+        <div class="chips"><span class="chip">Team Lead</span><span class="chip">Bot Manager</span><span class="chip">Zscaler</span></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-meta"><span class="exp-period">2021 — 2023</span></div>
+        <div class="exp-co">Akamai Technologies</div>
+        <div class="exp-role">Security Architect &amp; BMP SME</div>
+        <ul class="exp-ul">
+          <li>Internal SME for BMP and KONA WAF — escalation point for enterprise customers on credential stuffing, ATO, and L7 DDoS.</li>
+          <li>Built custom WAF signatures for zero-day payloads; deep false-positive analysis at scale.</li>
+          <li>Produced HLD/LLD design docs and onboarding documentation for global teams.</li>
+        </ul>
+        <div class="chips"><span class="chip">BMP</span><span class="chip">KONA WAF</span><span class="chip">HLD / LLD</span></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-meta"><span class="exp-period">2019 — 2021</span></div>
+        <div class="exp-co">Akamai Technologies</div>
+        <div class="exp-role">Solutions Engineer</div>
+        <ul class="exp-ul">
+          <li>Troubleshot CDN and edge issues across caching, TLS, routing, and origin performance.</li>
+          <li>Log forensics and packet analysis using WireShark across TCP/IP, DNS, HTTP(S).</li>
+          <li>Supported GTM, Cloudlets, WAF, Bot Manager, DataStream across enterprise accounts.</li>
+        </ul>
+        <div class="chips"><span class="chip">CDN</span><span class="chip">GTM</span><span class="chip">WireShark</span><span class="chip">DNS / TLS</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="consulting">
+  <div class="container">
+    <div class="eyebrow">Independent consulting</div>
+    <h2 class="stitle">Client work.<br>Real outcomes. <em>Anonymised.</em></h2>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-hdr"><span class="case-sector">Global Travel &amp; Hospitality</span><span class="case-status">Ongoing · 2025</span></div>
+        <h3>Full-Stack Edge Audit &amp; Optimisation</h3>
+        <p>A global hospitality brand with two Akamai properties serving 6B+ edge hits/month. CDN offload at 87%, SureRoute broken and silently failing, BMP underutilised, no blue-green deployment capability for the engineering team.</p>
+        <div class="outcomes">
+          <div class="oc-row"><span class="oc-num">~13.8M</span><span class="oc-desc">wasted origin hits/month being eliminated via 404 caching strategy</span></div>
+          <div class="oc-row"><span class="oc-num">87% → 95%+</span><span class="oc-desc">CDN offload improvement — direct origin compute cost reduction</span></div>
+          <div class="oc-row"><span class="oc-num">Edge DevOps</span><span class="oc-desc">Blue-green deployment built at edge via Dynamic Origin Hostname generation</span></div>
+          <div class="oc-row"><span class="oc-num">BMP Revamp</span><span class="oc-desc">Full Bot Manager Premier rebuild — detection logic to ROI rationalisation</span></div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-hdr"><span class="case-sector">Global Consumer Goods · E-commerce</span><span class="case-status">Completed · 2023–24</span></div>
+        <h3>WAF, Bot Management &amp; Cloudlet Policy Overhaul</h3>
+        <p>A global consumer goods brand needed their Akamai WAF and BMP policies rebuilt — existing rules were generating excessive false positives and Cloudlet-based routing logic was undocumented and brittle.</p>
+        <div class="outcomes">
+          <div class="oc-row"><span class="oc-num">WAF Rebuild</span><span class="oc-desc">KONA WAF redesigned — false positives reduced while threat coverage maintained</span></div>
+          <div class="oc-row"><span class="oc-num">BMP Redesign</span><span class="oc-desc">Detection logic tuned for e-commerce traffic patterns and checkout abuse</span></div>
+          <div class="oc-row"><span class="oc-num">Cloudlets</span><span class="oc-desc">EdgeRedirect and request-control policies rebuilt; geo-routing stabilised</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="eyebrow">Skills</div>
+    <h2 class="stitle">The <em>full</em> stack.</h2>
+    <div class="skills-grid">
+      <div class="sg">
+        <div class="sg-name">Security</div>
+        <div class="sk-row"><span class="sk-name">DDoS Mitigation L3/L4/L7</span><div class="sk-bar"><div class="sk-fill" style="width:98%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">WAF / WAAP (KONA, ASE)</span><div class="sk-bar"><div class="sk-fill" style="width:97%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">Bot Manager Premier</span><div class="sk-bar"><div class="sk-fill" style="width:96%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">API Security</span><div class="sk-bar"><div class="sk-fill" style="width:88%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">OWASP / Custom Signatures</span><div class="sk-bar"><div class="sk-fill" style="width:92%"></div></div></div>
+      </div>
+      <div class="sg">
+        <div class="sg-name">CDN &amp; Edge</div>
+        <div class="sk-row"><span class="sk-name">Akamai (full stack)</span><div class="sk-bar"><div class="sk-fill s" style="width:99%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">Cloudflare</span><div class="sk-bar"><div class="sk-fill s" style="width:82%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">Imperva</span><div class="sk-bar"><div class="sk-fill s" style="width:80%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">Cloudlets / Dynamic Origin</span><div class="sk-bar"><div class="sk-fill s" style="width:90%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">mPulse / RUM / CrUX</span><div class="sk-bar"><div class="sk-fill s" style="width:88%"></div></div></div>
+      </div>
+      <div class="sg">
+        <div class="sg-name">Infrastructure</div>
+        <div class="sk-row"><span class="sk-name">TCP/IP · DNS · TLS</span><div class="sk-bar"><div class="sk-fill y" style="width:95%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">Azure (NSGs, ingress)</span><div class="sk-bar"><div class="sk-fill y" style="width:78%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">Terraform IaC</span><div class="sk-bar"><div class="sk-fill y" style="width:75%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">WireShark / Log Forensics</span><div class="sk-bar"><div class="sk-fill y" style="width:92%"></div></div></div>
+        <div class="sk-row"><span class="sk-name">Python / Bash scripting</span><div class="sk-bar"><div class="sk-fill y" style="width:65%"></div></div></div>
+      </div>
+    </div>
+    <div class="plats">
+      <div class="plat"><div class="plat-n">Akamai</div><div class="plat-s">Expert · 7 years</div></div>
+      <div class="plat"><div class="plat-n">Cloudflare</div><div class="plat-s">Advanced · migration exp.</div></div>
+      <div class="plat"><div class="plat-n">Imperva</div><div class="plat-s">Advanced · migration exp.</div></div>
+      <div class="plat"><div class="plat-n">Azure</div><div class="plat-s">Proficient</div></div>
+      <div class="plat"><div class="plat-n">Terraform</div><div class="plat-s">Proficient</div></div>
+      <div class="plat"><div class="plat-n">Zscaler</div><div class="plat-s">Working knowledge</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-in">
+      <div>
+        <h2>Let's build<br>something <em>good.</em></h2>
+        <p>Available for senior edge architecture roles, security migration projects, and Akamai consulting engagements. Based in Bangalore — genuinely open to remote or relocation.</p>
+        <div class="c-links">
+          <a href="mailto:meetalkamb@gmail.com" class="c-link"><span class="c-type">Email</span><span class="c-val">meetalkamb@gmail.com</span></a>
+          <a href="tel:+919663082158" class="c-link"><span class="c-type">Phone</span><span class="c-val">+91 96630 82158</span></a>
+          <a href="https://linkedin.com/in/YOUR-HANDLE" class="c-link" target="_blank"><span class="c-type">LinkedIn</span><span class="c-val">linkedin.com/in/your-handle</span></a>
+        </div>
+      </div>
+      <div class="av-box">
+        <div class="av-hdr"><span class="av-dot"></span>Currently available for</div>
+        <div class="av-rows">
+          <div class="av-row"><span class="av-type">Full-time roles</span><span class="b-open">Open</span></div>
+          <div class="av-row"><span class="av-type">Akamai consulting</span><span class="b-ltd">Limited slots</span></div>
+          <div class="av-row"><span class="av-type">CDN migration projects</span><span class="b-open">Open</span></div>
+          <div class="av-row"><span class="av-type">Security audits</span><span class="b-open">Open</span></div>
+          <div class="av-row"><span class="av-type">Advisory / fractional</span><span class="b-open">Open</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Alka Madan · Bangalore, India</p>
+  <p>Made with a lot of coffee ☕</p>
+</footer>
+
+</body>
+</html>
